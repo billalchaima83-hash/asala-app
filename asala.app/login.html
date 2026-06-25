@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="ar">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أصالة — منصة الحرف اليدوية</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+         :root {
+            --burgundy: #6B001A;
+            --burgundy-deep: #4A0012;
+            --gold: #C9A227;
+            --gold-light: #E8C547;
+            --cream: #FAF7F2;
+            --ink: #1C1008;
+            --muted: #6B6058;
+            --border: rgba(107, 0, 26, 0.14);
+            --white: #FFFFFF;
+            --success: #1B6B3A;
+            --danger: #A80000;
+        }
+        
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: var(--cream);
+            min-height: 100vh;
+            display: flex;
+            direction: rtl;
+            overflow: hidden;
+        }
+        /* Left panel — decorative */
+        
+        .side-panel {
+            flex: 1;
+            background: var(--burgundy);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .side-panel::before {
+            content: '';
+            position: absolute;
+            top: -80px;
+            right: -80px;
+            width: 320px;
+            height: 320px;
+            border-radius: 50%;
+            background: rgba(201, 162, 39, 0.08);
+        }
+        
+        .side-panel::after {
+            content: '';
+            position: absolute;
+            bottom: -60px;
+            left: -60px;
+            width: 240px;
+            height: 240px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.04);
+        }
+        
+        .brand-mark {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .brand-emblem {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            border: 3px solid var(--gold);
+            background: rgba(201, 162, 39, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+        }
+        
+        .brand-name {
+            font-family: 'Amiri', serif;
+            font-size: 3rem;
+            color: var(--white);
+            font-weight: 700;
+            text-align: center;
+        }
+        
+        .brand-tagline {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.55);
+            text-align: center;
+            max-width: 260px;
+            line-height: 1.8;
+        }
+        
+        .craft-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+        
+        .craft-badge {
+            background: rgba(201, 162, 39, 0.12);
+            border: 1px solid rgba(201, 162, 39, 0.3);
+            color: var(--gold-light);
+            font-size: 0.8rem;
+            padding: 5px 14px;
+            border-radius: 20px;
+        }
+        /* Right panel — form */
+        
+        .form-panel {
+            width: 460px;
+            flex-shrink: 0;
+            background: var(--white);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 3rem 2.5rem;
+            overflow-y: auto;
+        }
+        
+        .form-header {
+            margin-bottom: 2rem;
+        }
+        
+        .form-header h1 {
+            font-family: 'Amiri', serif;
+            font-size: 1.75rem;
+            color: var(--burgundy);
+            margin-bottom: 6px;
+        }
+        
+        .form-header p {
+            font-size: 0.9rem;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+        
+        .gold-bar {
+            width: 40px;
+            height: 3px;
+            background: var(--gold);
+            border-radius: 2px;
+            margin-bottom: 1rem;
+        }
+        
+        .alert {
+            padding: 11px 15px;
+            border-radius: 8px;
+            font-size: 0.88rem;
+            margin-bottom: 1.25rem;
+            display: none;
+            font-weight: 500;
+        }
+        
+        .alert-error {
+            background: #FBE9E9;
+            color: var(--danger);
+            border: 1px solid rgba(168, 0, 0, 0.2);
+        }
+        
+        .alert-success {
+            background: #EAF5EE;
+            color: var(--success);
+            border: 1px solid rgba(27, 107, 58, 0.2);
+        }
+        
+        .field {
+            margin-bottom: 1.25rem;
+        }
+        
+        .field label {
+            display: block;
+            font-size: 0.84rem;
+            font-weight: 600;
+            color: var(--muted);
+            margin-bottom: 7px;
+        }
+        
+        .input-wrap {
+            position: relative;
+        }
+        
+        .input-wrap input,
+        .input-wrap select {
+            width: 100%;
+            padding: 11px 16px;
+            border: 1.5px solid var(--border);
+            border-radius: 9px;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 0.97rem;
+            color: var(--ink);
+            background: #FEFCFA;
+            transition: border .2s, box-shadow .2s;
+            outline: none;
+            direction: rtl;
+        }
+        
+        .input-wrap input:focus,
+        .input-wrap select:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.13);
+        }
+        
+        input[type="password"] {
+            letter-spacing: 0.1em;
+        }
+        
+        .btn-submit {
+            width: 100%;
+            padding: 13px;
+            background: var(--burgundy);
+            color: var(--white);
+            border: none;
+            border-radius: 9px;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background .2s, transform .1s;
+            margin-top: .5rem;
+            letter-spacing: 0.02em;
+        }
+        
+        .btn-submit:hover {
+            background: var(--burgundy-deep, #4A0012);
+        }
+        
+        .btn-submit:active {
+            transform: scale(0.99);
+        }
+        
+        .toggle-row {
+            text-align: center;
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+            color: var(--muted);
+        }
+        
+        .toggle-row a {
+            color: var(--gold);
+            text-decoration: none;
+            font-weight: 700;
+            cursor: pointer;
+        }
+        
+        .toggle-row a:hover {
+            color: var(--burgundy);
+        }
+        
+        .divider {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 1.5rem 0;
+        }
+        
+        .role-tabs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 1.5rem;
+        }
+        
+        .role-tab {
+            border: 1.5px solid var(--border);
+            border-radius: 9px;
+            padding: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: .2s;
+            background: #FEFCFA;
+        }
+        
+        .role-tab .rt-icon {
+            font-size: 1.5rem;
+            display: block;
+            margin-bottom: 4px;
+        }
+        
+        .role-tab .rt-name {
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--muted);
+        }
+        
+        .role-tab.selected {
+            border-color: var(--gold);
+            background: rgba(201, 162, 39, 0.06);
+        }
+        
+        .role-tab.selected .rt-name {
+            color: var(--burgundy);
+        }
+        
+        #role-hidden {
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+                overflow: auto;
+            }
+            .side-panel {
+                padding: 2rem;
+                min-height: 220px;
+            }
+            .brand-name {
+                font-size: 2rem;
+            }
+            .form-panel {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="side-panel">
+        <div class="brand-mark">
+            <div class="brand-emblem">🏺</div>
+            <div>
+                <div class="brand-name">ASALA</div>
+                <div class="brand-tagline">منصة الحرف اليدوية الجزائرية الأصيلة — تجمع الحرفي بمحبّي الإبداع</div>
+            </div>
+            <div class="craft-badges">
+                <span class="craft-badge">✦ خزف وفخار</span>
+                <span class="craft-badge">✦ نسيج وزرابي</span>
+                <span class="craft-badge">✦ نحاسيات</span>
+                <span class="craft-badge">✦ حلي تقليدية</span>
+                <span class="craft-badge">✦ تطريز</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-panel">
+        <div class="form-header">
+            <div class="gold-bar"></div>
+            <h1 id="auth-title">تسجيل الدخول</h1>
+            <p id="auth-desc">مرحباً بك في منصة أصالة للحرف اليدوية</p>
+        </div>
+
+        <div id="alert-box" class="alert"></div>
+
+        <form id="auth-form" autocomplete="off">
+            <div class="field">
+                <label for="username">اسم المستخدم</label>
+                <div class="input-wrap">
+                    <input type="text" id="username" required placeholder="أدخل اسم المستخدم">
+                </div>
+            </div>
+
+            <div class="field">
+                <label for="password">كلمة المرور</label>
+                <div class="input-wrap">
+                    <input type="password" id="password" required placeholder="• • • • • • • •">
+                </div>
+            </div>
+
+            <div id="role-group" style="display:none; margin-bottom:1.25rem;">
+                <label style="font-size:0.84rem; font-weight:600; color:var(--muted); display:block; margin-bottom:10px;">اختر دورك في المنصة</label>
+                <div class="role-tabs">
+                    <div class="role-tab selected" onclick="selectRole('artisan', this)">
+                        <span class="rt-icon">👨‍🎨</span>
+                        <span class="rt-name">حرفي</span>
+                    </div>
+                    <div class="role-tab" onclick="selectRole('client', this)">
+                        <span class="rt-icon">🛍️</span>
+                        <span class="rt-name">زبون</span>
+                    </div>
+                </div>
+                <input type="hidden" id="user-role" value="artisan" id="role-hidden">
+            </div>
+
+            <button type="submit" class="btn-submit" id="btn-text">دخول</button>
+        </form>
+
+        <div class="toggle-row">
+            <span id="toggle-hint">ليس لديك حساب؟</span>
+            <a id="toggle-link">إنشاء حساب</a>
+        </div>
+    </div>
+
+    <script>
+        function initPlatformData() {
+            if (!localStorage.getItem('platform_initialized')) {
+                const defaultUsers = [{
+                    username: "artisan1",
+                    password: "123",
+                    role: "artisan"
+                }, {
+                    username: "client1",
+                    password: "123",
+                    role: "client"
+                }];
+                const defaultProducts = [{
+                    id: 1,
+                    name: "إناء خزفي مزخرف فاخر",
+                    price: 3500,
+                    artisan: "أحمد الخزفي",
+                    craft: "خزف",
+                    img: "https://via.placeholder.com/400x280/800020/FDF6E3?text=🏺"
+                }, {
+                    id: 2,
+                    name: "زربية صوفية تقليدية أصيلة",
+                    price: 24000,
+                    artisan: "فاطمة للنسيج",
+                    craft: "نسيج",
+                    img: "https://via.placeholder.com/400x280/6B001A/FDF6E3?text=🧵"
+                }, {
+                    id: 3,
+                    name: "إبريق نحاسي منقوش يدوياً",
+                    price: 8500,
+                    artisan: "سعيد النحاس",
+                    craft: "نحاسيات",
+                    img: "https://via.placeholder.com/400x280/4A0012/FDF6E3?text=⚱️"
+                }];
+                const defaultOrders = [{
+                    id: "ORD-7721",
+                    product: "طقم كؤوس فخارية",
+                    client: "client1",
+                    type: "محلي",
+                    destination: "الجزائر العاصمة",
+                    status: "جاري التجهيز في الورشة"
+                }];
+                localStorage.setItem('users', JSON.stringify(defaultUsers));
+                localStorage.setItem('products', JSON.stringify(defaultProducts));
+                localStorage.setItem('orders', JSON.stringify(defaultOrders));
+                localStorage.setItem('cart', JSON.stringify([]));
+                localStorage.setItem('platform_initialized', 'true');
+            }
+        }
+        initPlatformData();
+
+        let isLoginMode = true;
+
+        function selectRole(val, el) {
+            document.getElementById('user-role').value = val;
+            document.querySelectorAll('.role-tab').forEach(t => t.classList.remove('selected'));
+            el.classList.add('selected');
+        }
+
+        function showAlert(msg, type) {
+            const box = document.getElementById('alert-box');
+            box.textContent = msg;
+            box.className = 'alert alert-' + type;
+            box.style.display = 'block';
+            setTimeout(() => box.style.display = 'none', 4000);
+        }
+
+        document.getElementById('toggle-link').addEventListener('click', () => {
+            isLoginMode = !isLoginMode;
+            const rg = document.getElementById('role-group');
+            if (isLoginMode) {
+                document.getElementById('auth-title').textContent = 'تسجيل الدخول';
+                document.getElementById('auth-desc').textContent = 'مرحباً بك في منصة أصالة للحرف اليدوية';
+                rg.style.display = 'none';
+                document.getElementById('btn-text').textContent = 'دخول';
+                document.getElementById('toggle-hint').textContent = 'ليس لديك حساب؟';
+                document.getElementById('toggle-link').textContent = 'إنشاء حساب';
+            } else {
+                document.getElementById('auth-title').textContent = 'إنشاء حساب جديد';
+                document.getElementById('auth-desc').textContent = 'انضم إلى مجتمع الحرفيين والزبائن الشغوفين';
+                rg.style.display = 'block';
+                document.getElementById('btn-text').textContent = 'تسجيل الحساب';
+                document.getElementById('toggle-hint').textContent = 'لديك حساب؟';
+                document.getElementById('toggle-link').textContent = 'سجل دخولك هنا';
+            }
+        });
+
+        document.getElementById('auth-form').addEventListener('submit', e => {
+            e.preventDefault();
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value;
+            const role = document.getElementById('user-role').value;
+            let users = JSON.parse(localStorage.getItem('users')) || [];
+
+            if (isLoginMode) {
+                const user = users.find(u => u.username.toLowerCase() === username.toLowerCase() && u.password === password);
+                if (user) {
+                    showAlert('تم التحقق بنجاح! جاري التوجيه...', 'success');
+                    localStorage.setItem('currentUser', JSON.stringify(user));
+                    setTimeout(() => {
+                        window.location.href = user.role === 'artisan' ? 'artisan.html' : 'client.html';
+                    }, 900);
+                } else {
+                    showAlert('اسم المستخدم أو كلمة المرور غير صحيحة.', 'error');
+                }
+            } else {
+                if (users.some(u => u.username.toLowerCase() === username.toLowerCase())) {
+                    showAlert('اسم المستخدم هذا محجوز مسبقاً.', 'error');
+                } else {
+                    const newUser = {
+                        username,
+                        password,
+                        role
+                    };
+                    users.push(newUser);
+                    localStorage.setItem('users', JSON.stringify(users));
+                    localStorage.setItem('currentUser', JSON.stringify(newUser));
+                    showAlert('تم إنشاء حسابك! جاري التوجيه...', 'success');
+                    setTimeout(() => {
+                        window.location.href = role === 'artisan' ? 'artisan.html' : 'client.html';
+                    }, 1000);
+                }
+            }
+        });
+    </script>
+    <script src="js/auth.js"></script>
+</body>
+
+</html>

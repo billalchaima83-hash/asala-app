@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="ar">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أصالة — بوابة الحرفي</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&family=Amiri:wght@400;700&display=swap');
+         :root {
+            --burgundy: #6B001A;
+            --burgundy-deep: #4A0012;
+            --burgundy-light: #9B1030;
+            --gold: #C9A227;
+            --gold-light: #E8C547;
+            --gold-pale: #FDF6E3;
+            --cream: #FAF7F2;
+            --ink: #1C1008;
+            --muted: #6B6058;
+            --border: rgba(107, 0, 26, 0.12);
+            --border-strong: rgba(107, 0, 26, 0.25);
+            --white: #FFFFFF;
+            --success: #1B6B3A;
+            --success-bg: #EAF5EE;
+            --danger: #A80000;
+            --danger-bg: #FBE9E9;
+            --shadow-sm: 0 2px 8px rgba(107, 0, 26, 0.06);
+            --shadow-md: 0 6px 24px rgba(107, 0, 26, 0.10);
+            --shadow-lg: 0 16px 48px rgba(107, 0, 26, 0.14);
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            --transition: 0.25s cubic-bezier(.4, 0, .2, 1);
+        }
+        
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: var(--cream);
+            color: var(--ink);
+            direction: rtl;
+            font-size: 16px;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        /* ─── TOPBAR ─── */
+        
+        .topbar {
+            background: var(--burgundy);
+            border-bottom: 3px solid var(--gold);
+            padding: 0 2rem;
+            height: 68px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .topbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        
+        .topbar-logo {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            border: 2px solid var(--gold);
+            background: var(--burgundy-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+        
+        .topbar-title {
+            font-family: 'Amiri', serif;
+            font-size: 1.35rem;
+            color: var(--white);
+            font-weight: 700;
+        }
+        
+        .topbar-subtitle {
+            font-size: 0.78rem;
+            color: rgba(255, 255, 255, 0.55);
+            margin-top: -2px;
+        }
+        
+        .topbar-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .user-chip {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 30px;
+            padding: 6px 14px 6px 8px;
+        }
+        
+        .user-avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: var(--gold);
+            color: var(--burgundy-deep);
+            font-size: 0.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        
+        .user-name {
+            font-size: 0.88rem;
+            color: var(--white);
+            max-width: 120px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        
+        .btn-logout {
+            background: transparent;
+            border: 1.5px solid rgba(201, 162, 39, 0.5);
+            color: var(--gold-light);
+            padding: 7px 16px;
+            border-radius: var(--radius-sm);
+            font-family: 'Tajawal', sans-serif;
+            font-size: 0.88rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .btn-logout:hover {
+            background: var(--gold);
+            color: var(--burgundy-deep);
+            border-color: var(--gold);
+        }
+        /* ─── PAGE WRAPPER ─── */
+        
+        .page-wrapper {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+        /* ─── BUTTONS ─── */
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+            padding: 9px 20px;
+            border-radius: var(--radius-sm);
+            font-family: 'Tajawal', sans-serif;
+            font-size: 0.92rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            white-space: nowrap;
+        }
+        
+        .btn-primary {
+            background: var(--burgundy);
+            color: var(--white);
+        }
+        
+        .btn-primary:hover {
+            background: var(--burgundy-deep);
+        }
+        
+        .btn-gold {
+            background: var(--gold);
+            color: var(--burgundy-deep);
+        }
+        
+        .btn-gold:hover {
+            background: var(--gold-light);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 1.5px solid var(--border-strong);
+            color: var(--burgundy);
+        }
+        
+        .btn-outline:hover {
+            background: var(--burgundy);
+            color: var(--white);
+        }
+        
+        .btn-sm {
+            padding: 6px 13px;
+            font-size: 0.82rem;
+        }
+        
+        .btn-lg {
+            padding: 13px 28px;
+            font-size: 1.05rem;
+        }
+        /* ─── DASHBOARD CARDS ─── */
+        
+        .dash-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 1.25rem;
+            margin-bottom: 2rem;
+        }
+        
+        .dash-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 1.75rem 1.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .dash-card::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            height: 3px;
+            background: var(--gold);
+            transform: scaleX(0);
+            transition: var(--transition);
+        }
+        
+        .dash-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--gold);
+        }
+        
+        .dash-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .dash-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--cream);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin: 0 auto 1rem;
+            border: 1px solid var(--border);
+        }
+        
+        .dash-card h3 {
+            font-family: 'Amiri', serif;
+            font-size: 1.1rem;
+            color: var(--burgundy);
+            margin-bottom: 6px;
+        }
+        
+        .dash-card p {
+            font-size: 0.82rem;
+            color: var(--muted);
+            line-height: 1.5;
+        }
+        /* ─── SECTION PANEL ─── */
+        
+        .section-panel {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
+            padding: 2rem;
+            margin-top: 1.5rem;
+            display: none;
+            animation: slidein .3s ease;
+            border-top: 3px solid var(--gold);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        @keyframes slidein {
+            from {
+                opacity: 0;
+                transform: translateY(16px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .section-panel.open {
+            display: block;
+        }
+        
+        .panel-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .panel-title {
+            font-family: 'Amiri', serif;
+            font-size: 1.35rem;
+            color: var(--burgundy);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        /* ─── FORMS ─── */
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.25rem;
+        }
+        
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        
+        .field label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--muted);
+        }
+        
+        .field input,
+        .field select,
+        .field textarea {
+            padding: 10px 14px;
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius-sm);
+            font-family: 'Tajawal', sans-serif;
+            font-size: 0.95rem;
+            color: var(--ink);
+            background: var(--white);
+            transition: var(--transition);
+            outline: none;
+            width: 100%;
+        }
+        
+        .field input:focus,
+        .field select:focus,
+        .field textarea:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.12);
+        }
+        
+        .field textarea {
+            resize: vertical;
+            min-height: 90px;
+        }
+        /* ─── PRICING ─── */
+        
+        .pricing-boxes {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .price-box {
+            background: var(--cream);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 1.25rem;
+            text-align: center;
+        }
+        
+        .price-box label {
+            font-size: 0.8rem;
+            color: var(--muted);
+            font-weight: 600;
+            display: block;
+            margin-bottom: 8px;
+        }
+        
+        .price-box .val {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--ink);
+        }
+        
+        .price-box.featured {
+            background: var(--burgundy);
+            border-color: var(--burgundy);
+        }
+        
+        .price-box.featured label {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .price-box.featured .val {
+            color: var(--gold-light);
+            font-size: 1.75rem;
+        }
+        /* ─── TABLES ─── */
+        
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--white);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .data-table thead th {
+            background: var(--cream);
+            color: var(--burgundy);
+            font-weight: 600;
+            font-size: 0.88rem;
+            padding: 13px 16px;
+            border-bottom: 1px solid var(--border);
+            text-align: right;
+        }
+        
+        .data-table tbody td {
+            padding: 13px 16px;
+            border-bottom: 1px solid rgba(107, 0, 26, 0.05);
+            font-size: 0.92rem;
+            color: var(--ink);
+            text-align: right;
+            vertical-align: middle;
+        }
+        
+        .data-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .data-table tbody tr:hover td {
+            background: var(--cream);
+        }
+        /* ─── BADGES ─── */
+        
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 600;
+        }
+        
+        .badge-local {
+            background: #E3F0FF;
+            color: #0A3D7A;
+        }
+        
+        .badge-intl {
+            background: #F0E8FB;
+            color: #4A148C;
+        }
+        
+        .badge-status {
+            background: var(--gold-pale);
+            color: #7A5900;
+        }
+        
+        .badge-done {
+            background: var(--success-bg);
+            color: var(--success);
+        }
+        
+        .badge-danger {
+            background: var(--danger-bg);
+            color: var(--danger);
+        }
+        /* ─── MEDIA PREVIEW ─── */
+        
+        .media-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 10px;
+            margin-top: 12px;
+        }
+        
+        .media-thumb {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            border-radius: var(--radius-sm);
+            border: 1.5px solid var(--border);
+        }
+        /* ─── EMPTY STATE ─── */
+        
+        .empty-state {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: var(--muted);
+        }
+        
+        .empty-state .empty-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+        
+        .empty-state p {
+            font-size: 0.95rem;
+        }
+        /* ─── DIVIDER ─── */
+        
+        .divider {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 1.5rem 0;
+        }
+        /* ─── RESPONSIVE ─── */
+        
+        @media (max-width: 768px) {
+            .topbar {
+                padding: 10px;
+                height: auto;
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+            .dash-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .pricing-boxes {
+                grid-template-columns: 1fr;
+            }
+            .page-wrapper {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+        <div class="topbar-brand">
+            <div class="topbar-logo">🏺</div>
+            <div>
+                <div class="topbar-title">بوابة الحرفي</div>
+                <div class="topbar-subtitle">منصة أصالة — لوحة التحكم</div>
+            </div>
+        </div>
+
+        <div class="topbar-actions">
+            <div class="user-chip">
+                <div class="user-avatar" id="user-avatar-initials">H</div>
+                <span class="user-name" id="artisan-name">حرفي</span>
+            </div>
+            <button class="btn-logout" onclick="logout()">خروج</button>
+        </div>
+    </header>
+
+    <div class="page-wrapper">
+
+        <!-- WELCOME BANNER -->
+        <div style="background:linear-gradient(135deg, var(--burgundy) 0%, #4A0012 100%); border-radius:var(--radius-lg); padding:1.75rem 2rem; margin-bottom:2rem; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem;">
+            <div>
+                <div style="font-family:'Amiri',serif; font-size:1.5rem; color:white; margin-bottom:4px;" id="welcome-artisan">مرحباً، أيها الحرفي المبدع</div>
+                <div style="font-size:0.88rem; color:rgba(255,255,255,0.55);">أدر ورشتك، اعرض منتجاتك، وتواصل مع زبائنك محلياً ودولياً</div>
+            </div>
+            <div style="display:flex; gap:1rem; flex-wrap:wrap;">
+                <div style="background:rgba(255,255,255,0.08); border-radius:var(--radius-sm); padding:12px 20px; text-align:center;">
+                    <div style="font-size:1.5rem; font-weight:700; color:var(--gold-light);" id="stat-products">—</div>
+                    <div style="font-size:0.78rem; color:rgba(255,255,255,0.55);">منتج معروض</div>
+                </div>
+                <div style="background:rgba(255,255,255,0.08); border-radius:var(--radius-sm); padding:12px 20px; text-align:center;">
+                    <div style="font-size:1.5rem; font-weight:700; color:var(--gold-light);" id="stat-orders">—</div>
+                    <div style="font-size:0.78rem; color:rgba(255,255,255,0.55);">طلب نشط</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- DASHBOARD GRID -->
+        <div class="dash-grid">
+            <div class="dash-card" onclick="openPanel('workshop-section', this)">
+                <div class="dash-icon">🏢</div>
+                <h3>إدارة الورشة</h3>
+                <p>بيانات ورشتك وتخصصك الحرفي</p>
+            </div>
+            <div class="dash-card" onclick="openPanel('products-section', this)">
+                <div class="dash-icon">🏺</div>
+                <h3>المنتجات</h3>
+                <p>إضافة القطع الفنية وتسعيرها</p>
+            </div>
+            <div class="dash-card" onclick="openPanel('pricing-section', this)">
+                <div class="dash-icon">💰</div>
+                <h3>التسعير الذكي</h3>
+                <p>احسب تكاليفك وهوامش ربحك</p>
+            </div>
+            <div class="dash-card" onclick="openPanel('orders-section', this)">
+                <div class="dash-icon">📦</div>
+                <h3>الطلبات والشحن</h3>
+                <p>تتبع ومعالجة طلبات الزبائن</p>
+            </div>
+            <div class="dash-card" onclick="openPanel('live-section', this)">
+                <div class="dash-icon">🔴</div>
+                <h3>البث المباشر</h3>
+                <p>ابث عملك مباشرة للزبائن</p>
+            </div>
+            <div class="dash-card" onclick="openPanel('backstage-section', this)">
+                <div class="dash-icon">🎬</div>
+                <h3>كواليس العمل</h3>
+                <p>شارك قصة صناعة قطعك الفنية</p>
+            </div>
+        </div>
+
+        <!-- PANEL: WORKSHOP -->
+        <div id="workshop-section" class="section-panel">
+            <div class="panel-header">
+                <div class="panel-title">🏢 بيانات الورشة</div>
+                <button class="btn btn-outline btn-sm" onclick="closePanel('workshop-section')">✕ إغلاق</button>
+            </div>
+            <div class="form-grid">
+                <div class="field">
+                    <label>اسم الورشة</label>
+                    <input type="text" id="ws-name" placeholder="مثال: ورشة الفخار الأصيل">
+                </div>
+                <div class="field">
+                    <label>الولاية / المنطقة</label>
+                    <input type="text" id="ws-city" placeholder="مثال: سطيف، قسنطينة...">
+                </div>
+                <div class="field">
+                    <label>التخصص الحرفي</label>
+                    <select id="ws-type">
+            <option>خزف وفخار</option>
+            <option>صناعة السجاد التقليدي</option>
+            <option>النحاسيات والمعادن</option>
+            <option>الحلي والمجوهرات التقليدية</option>
+            <option>التطريز والنسيج</option>
+            <option>النجارة التقليدية</option>
+          </select>
+                </div>
+                <div class="field">
+                    <label>الخبرة (بالسنوات)</label>
+                    <input type="number" id="ws-years" placeholder="مثال: 15">
+                </div>
+            </div>
+            <div class="field" style="margin-top:1.25rem;">
+                <label>نبذة عن الورشة</label>
+                <textarea id="ws-bio" placeholder="اكتب هنا قصة ورشتك وما يميز صنعتك..."></textarea>
+            </div>
+            <div style="margin-top:1rem;">
+                <button class="btn btn-primary" onclick="showToast('تم حفظ بيانات الورشة بنجاح ✓')">حفظ البيانات</button>
+            </div>
+        </div>
+
+        <!-- PANEL: PRODUCTS -->
+        <div id="products-section" class="section-panel">
+            <div class="panel-header">
+                <div class="panel-title">🏺 إضافة منتج جديد</div>
+                <button class="btn btn-outline btn-sm" onclick="closePanel('products-section')">✕ إغلاق</button>
+            </div>
+            <div class="form-grid">
+                <div class="field">
+                    <label>اسم المنتج الفني</label>
+                    <input type="text" id="p-name" placeholder="مثال: كوز نحاسي منقوش">
+                </div>
+                <div class="field">
+                    <label>السعر (د.ج)</label>
+                    <input type="number" id="p-price" placeholder="مثال: 4500">
+                </div>
+                <div class="field">
+                    <label>التصنيف</label>
+                    <select id="p-craft">
+            <option>خزف</option>
+            <option>نسيج</option>
+            <option>نحاسيات</option>
+            <option>حلي تقليدية</option>
+            <option>تطريز</option>
+          </select>
+                </div>
+                <div class="field">
+                    <label>صورة المنتج</label>
+                    <input type="file" id="p-image-file" accept="image/*" onchange="previewMedia(this, 'product-media-preview')">
+                </div>
+            </div>
+            <div id="product-media-preview" class="media-grid"></div>
+            <div style="margin-top:1.25rem;">
+                <button class="btn btn-gold" onclick="addProduct()">نشر المنتج في السوق ✦</button>
+            </div>
+
+            <hr class="divider">
+
+            <h3 style="font-family:'Amiri',serif; color:var(--burgundy); margin-bottom:1rem; font-size:1.15rem;">منتجاتك المنشورة</h3>
+            <div id="my-products-list"></div>
+        </div>
+
+        <!-- PANEL: PRICING -->
+        <div id="pricing-section" class="section-panel">
+            <div class="panel-header">
+                <div class="panel-title">💰 نظام التسعير الذكي</div>
+                <button class="btn btn-outline btn-sm" onclick="closePanel('pricing-section')">✕ إغلاق</button>
+            </div>
+            <p style="font-size:0.9rem; color:var(--muted); margin-bottom:1.5rem;"> النظام لا يمثل جهة ضريبية و لا يقوم بأي دور رقابي</p>
+
+            <div class="form-grid">
+                <div class="field">
+                    <label>تكلفة المواد الأولية (د.ج)</label>
+                    <input type="number" id="mat-cost" value="0" oninput="calcPrice()">
+                </div>
+                <div class="field">
+                    <label>ساعات العمل</label>
+                    <input type="number" id="work-hours" value="0" oninput="calcPrice()">
+                </div>
+                <div class="field">
+                    <label>تكلفة الساعة (د.ج)</label>
+                    <input type="number" id="hour-rate" value="500" oninput="calcPrice()">
+                </div>
+                <div class="field">
+                    <label>هامش الربح (%)</label>
+                    <input type="number" id="profit-margin" value="20" min="5" max="80" oninput="calcPrice()">
+                </div>
+            </div>
+
+            <div class="pricing-boxes">
+                <div class="price-box">
+                    <label>الحد الأدنى المسموح</label>
+                    <div class="val" id="price-min">0 د.ج</div>
+                </div>
+                <div class="price-box featured">
+                    <label>السعر المقترح العادل</label>
+                    <div class="val" id="price-suggested">0 د.ج</div>
+                </div>
+                <div class="price-box">
+                    <label>الحد الأقصى المسموح</label>
+                    <div class="val" id="price-max">0 د.ج</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PANEL: ORDERS -->
+        <div id="orders-section" class="section-panel">
+            <div class="panel-header">
+                <div class="panel-title">📦 إدارة الطلبات</div>
+                <button class="btn btn-outline btn-sm" onclick="closePanel('orders-section')">✕ إغلاق</button>
+            </div>
+
+            <div id="orders-empty" class="empty-state" style="display:none;">
+                <div class="empty-icon">📦</div>
+                <p>لا توجد طلبات حتى الآن.</p>
+            </div>
+
+            <table class="data-table" id="orders-table">
+                <thead>
+                    <tr>
+                        <th>رقم الطلب</th>
+                        <th>المنتج</th>
+                        <th>الزبون</th>
+                        <th>نوع الشحن</th>
+                        <th>الحالة</th>
+                        <th>إجراء</th>
+                    </tr>
+                </thead>
+                <tbody id="orders-table-body"></tbody>
+            </table>
+        </div>
+
+        <!-- PANEL: LIVE -->
+        <div id="live-section" class="section-panel">
+            <div class="panel-header">
+                <div class="panel-title">🔴 البث المباشر</div>
+                <button class="btn btn-outline btn-sm" onclick="closePanel('live-section')">✕ إغلاق</button>
+            </div>
+            <div class="form-grid">
+                <div class="field">
+                    <label>عنوان البث</label>
+                    <input type="text" id="live-title" placeholder="مثال: بث حي — تشكيل الطين الأحمر">
+                </div>
+                <div class="field">
+                    <label>صورة الغلاف</label>
+                    <input type="file" accept="image/*">
+                </div>
+            </div>
+            <p style="font-size:0.85rem; color:var(--muted); margin:1rem 0;">سيُرسَل إشعار فوري لمتابعيك عند بدء البث.</p>
+            <button class="btn btn-lg" style="background:#CC0000; color:white;" onclick="showToast('● تم تشغيل البث المباشر وإشعار المتابعين!')">
+        ● ابدأ البث الآن
+      </button>
+        </div>
+
+        <!-- PANEL: BACKSTAGE -->
+        <div id="backstage-section" class="section-panel">
+            <div class="panel-header">
+                <div class="panel-title">🎬 كواليس العمل</div>
+                <button class="btn btn-outline btn-sm" onclick="closePanel('backstage-section')">✕ إغلاق</button>
+            </div>
+            <p style="font-size:0.9rem; color:var(--muted); margin-bottom:1.5rem;">شارك زبائنك مقاطع حصرية من قلب الورشة لبناء الثقة والمصداقية.</p>
+            <div class="form-grid">
+                <div class="field">
+                    <label>عنوان المقطع</label>
+                    <input type="text" id="backstage-title" placeholder="مثال: مراحل تجفيف الخشب التقليدي">
+                </div>
+                <div class="field">
+                    <label>رفع فيديو أو صورة</label>
+                    <input type="file" id="backstage-file" accept="video/*,image/*" onchange="previewMedia(this, 'backstage-media-preview')">
+                </div>
+            </div>
+            <div id="backstage-media-preview" class="media-grid"></div>
+            <div style="margin-top:1.25rem;">
+                <button class="btn btn-primary" onclick="showToast('تم نشر الكواليس وإظهاره للزبائن ✓')">نشر القصة</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const user = JSON.parse(localStorage.getItem('currentUser'));
+            if (!user || user.role !== 'artisan') {
+                window.location.href = 'login.html';
+                return;
+            }
+            document.getElementById('artisan-name').textContent = user.username;
+            document.getElementById('user-avatar-initials').textContent = user.username[0].toUpperCase();
+            document.getElementById('welcome-artisan').textContent = `مرحباً، ${user.username} ✦`;
+
+            const products = JSON.parse(localStorage.getItem('products')) || [];
+            const myProducts = products.filter(p => p.artisan === user.username);
+            const orders = JSON.parse(localStorage.getItem('orders')) || [];
+            document.getElementById('stat-products').textContent = myProducts.length || products.length;
+            document.getElementById('stat-orders').textContent = orders.length;
+
+            loadOrders();
+            loadMyProducts();
+        });
+
+        let activePanel = null;
+
+        function openPanel(id, card) {
+            document.querySelectorAll('.section-panel').forEach(p => p.classList.remove('open'));
+            document.querySelectorAll('.dash-card').forEach(c => c.style.borderColor = '');
+            document.getElementById(id).classList.add('open');
+            if (card) card.style.borderColor = 'var(--gold)';
+            activePanel = id;
+            setTimeout(() => document.getElementById(id).scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            }), 50);
+        }
+
+        function closePanel(id) {
+            document.getElementById(id).classList.remove('open');
+        }
+
+        function previewMedia(input, containerId) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = '';
+            if (input.files && input.files[0]) {
+                const file = input.files[0];
+                const reader = new FileReader();
+                reader.onload = e => {
+                    if (file.type.startsWith('image/')) {
+                        const img = document.createElement('img');
+                        img.src = e.target.result;
+                        img.className = 'media-thumb';
+                        container.appendChild(img);
+                    } else if (file.type.startsWith('video/')) {
+                        const vid = document.createElement('video');
+                        vid.src = e.target.result;
+                        vid.controls = true;
+                        vid.style.cssText = 'width:100%; border-radius:var(--radius-sm);';
+                        container.appendChild(vid);
+                    }
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function calcPrice() {
+            const mat = parseFloat(document.getElementById('mat-cost').value) || 0;
+            const hrs = parseFloat(document.getElementById('work-hours').value) || 0;
+            const rate = parseFloat(document.getElementById('hour-rate').value) || 0;
+            const margin = parseFloat(document.getElementById('profit-margin').value) || 0;
+            const base = mat + (hrs * rate);
+            const suggested = base * (1 + margin / 100);
+            const min = suggested * 0.90;
+            const max = suggested * 1.15;
+            document.getElementById('price-suggested').textContent = Math.round(suggested).toLocaleString('ar-DZ') + ' د.ج';
+            document.getElementById('price-min').textContent = Math.round(min).toLocaleString('ar-DZ') + ' د.ج';
+            document.getElementById('price-max').textContent = Math.round(max).toLocaleString('ar-DZ') + ' د.ج';
+        }
+
+        function addProduct() {
+            const name = document.getElementById('p-name').value.trim();
+            const price = parseFloat(document.getElementById('p-price').value) || 0;
+            const craft = document.getElementById('p-craft').value;
+            const user = JSON.parse(localStorage.getItem('currentUser'));
+            if (!name || !price) {
+                showToast('أدخل اسم المنتج وسعره أولاً.');
+                return;
+            }
+            let products = JSON.parse(localStorage.getItem('products')) || [];
+            products.push({
+                id: Date.now(),
+                name,
+                price,
+                craft,
+                artisan: user.username,
+                img: `https://via.placeholder.com/400x280/6B001A/FDF6E3?text=${encodeURIComponent(name.substring(0,8))}`
+            });
+            localStorage.setItem('products', JSON.stringify(products));
+            document.getElementById('p-name').value = '';
+            document.getElementById('p-price').value = '';
+            document.getElementById('product-media-preview').innerHTML = '';
+            document.getElementById('stat-products').textContent = products.filter(p => p.artisan === user.username).length;
+            loadMyProducts();
+            showToast(`تم نشر "${name}" في سوق أصالة ✓`);
+        }
+
+        function loadMyProducts() {
+            const user = JSON.parse(localStorage.getItem('currentUser'));
+            const products = JSON.parse(localStorage.getItem('products')) || [];
+            const mine = products.filter(p => p.artisan === user.username);
+            const container = document.getElementById('my-products-list');
+            if (!container) return;
+            if (!mine.length) {
+                container.innerHTML = '<div class="empty-state"><p>لم تضف منتجات بعد.</p></div>';
+                return;
+            }
+            container.innerHTML = '';
+            const table = document.createElement('table');
+            table.className = 'data-table';
+            table.innerHTML = `<thead><tr><th>المنتج</th><th>التصنيف</th><th>السعر</th></tr></thead>`;
+            const tbody = document.createElement('tbody');
+            mine.forEach(p => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `<td><strong>${p.name}</strong></td><td><span class="badge badge-status">${p.craft || 'حرف'}</span></td><td style="color:var(--success); font-weight:700;">${p.price.toLocaleString('ar-DZ')} د.ج</td>`;
+                tbody.appendChild(tr);
+            });
+            table.appendChild(tbody);
+            container.appendChild(table);
+        }
+
+        function loadOrders() {
+            const orders = JSON.parse(localStorage.getItem('orders')) || [];
+            const tbody = document.getElementById('orders-table-body');
+            const emptyEl = document.getElementById('orders-empty');
+            const tableEl = document.getElementById('orders-table');
+            if (!tbody) return;
+            tbody.innerHTML = '';
+            if (!orders.length) {
+                emptyEl.style.display = 'block';
+                tableEl.style.display = 'none';
+                return;
+            }
+            emptyEl.style.display = 'none';
+            tableEl.style.display = 'table';
+            orders.forEach((order, i) => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+          <td><strong style="color:var(--burgundy);">${order.id}</strong></td>
+          <td>${order.product}</td>
+          <td>${order.client}</td>
+          <td><span class="badge ${order.type === 'محلي' ? 'badge-local' : 'badge-intl'}">${order.type === 'محلي' ? '🇩🇿 محلي' : '🌍 دولي'}</span></td>
+          <td><span class="badge badge-status">${order.status}</span></td>
+          <td><button class="btn btn-primary btn-sm" onclick="updateOrder(${i})">تحديث الحالة</button></td>`;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function updateOrder(i) {
+            let orders = JSON.parse(localStorage.getItem('orders')) || [];
+            orders[i].status = '📦 تم الشحن للناقل';
+            localStorage.setItem('orders', JSON.stringify(orders));
+            loadOrders();
+            showToast('تم تحديث حالة الشحن وإشعار الزبون ✓');
+        }
+
+        function showToast(msg) {
+            let t = document.getElementById('toast');
+            if (!t) {
+                t = document.createElement('div');
+                t.id = 'toast';
+                t.style.cssText = 'position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--ink);color:white;padding:12px 24px;border-radius:8px;font-family:Tajawal,sans-serif;font-size:0.9rem;z-index:9999;transition:opacity .3s;border-right:3px solid var(--gold);';
+                document.body.appendChild(t);
+            }
+            t.textContent = msg;
+            t.style.opacity = '1';
+            clearTimeout(t._timeout);
+            t._timeout = setTimeout(() => t.style.opacity = '0', 3000);
+        }
+
+        function logout() {
+            localStorage.removeItem('currentUser');
+            window.location.href = 'login.html';
+        }
+    </script>
+</body>
+
+</html>

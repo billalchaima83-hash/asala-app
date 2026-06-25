@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>أصالة — سوق الحرف اليدوية</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&family=Amiri:wght@400;700&display=swap');
+
+    :root {
+      --burgundy: #6B001A;
+      --burgundy-deep: #4A0012;
+      --burgundy-light: #9B1030;
+      --gold: #C9A227;
+      --gold-light: #E8C547;
+      --gold-pale: #FDF6E3;
+      --cream: #FAF7F2;
+      --ink: #1C1008;
+      --muted: #6B6058;
+      --border: rgba(107,0,26,0.12);
+      --border-strong: rgba(107,0,26,0.25);
+      --white: #FFFFFF;
+      --success: #1B6B3A;
+      --success-bg: #EAF5EE;
+      --danger: #A80000;
+      --danger-bg: #FBE9E9;
+      --shadow-sm: 0 2px 8px rgba(107,0,26,0.06);
+      --shadow-md: 0 6px 24px rgba(107,0,26,0.10);
+      --shadow-lg: 0 16px 48px rgba(107,0,26,0.14);
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 20px;
+      --transition: 0.25s cubic-bezier(.4,0,.2,1);
+    }
+
+    *,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Tajawal', sans-serif;
+      background-color: var(--cream);
+      color: var(--ink);
+      direction: rtl;
+      font-size: 16px;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* ─── TOPBAR ─── */
+    .topbar {
+      background: var(--burgundy);
+      border-bottom: 3px solid var(--gold);
+      padding: 0 2rem;
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .topbar-brand { display: flex; align-items: center; gap: 14px; }
+
+    .topbar-logo {
+      width: 42px; height: 42px; border-radius: 50%;
+      border: 2px solid var(--gold);
+      background: var(--burgundy-light);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; flex-shrink: 0;
+    }
+
+    .topbar-title { font-family: 'Amiri', serif; font-size: 1.35rem; color: var(--white); font-weight: 700; letter-spacing: 0.02em; }
+    .topbar-subtitle { font-size: 0.78rem; color: rgba(255,255,255,0.55); margin-top: -2px; }
+
+    .topbar-nav { display: flex; align-items: center; gap: 4px; }
+
+    .nav-tab {
+      background: transparent; border: none;
+      color: rgba(255,255,255,0.65);
+      padding: 8px 16px; font-size: 0.92rem;
+      font-family: 'Tajawal', sans-serif; font-weight: 500;
+      cursor: pointer; border-radius: var(--radius-sm);
+      transition: var(--transition);
+      display: flex; align-items: center; gap: 7px; white-space: nowrap;
+    }
+
+    .nav-tab:hover { color: var(--white); background: rgba(255,255,255,0.08); }
+    .nav-tab.active { color: var(--gold-light); background: rgba(201,162,39,0.12); }
+
+    .nav-badge {
+      background: var(--gold); color: var(--burgundy-deep);
+      font-size: 0.72rem; font-weight: 700;
+      min-width: 18px; height: 18px; padding: 0 4px;
+      border-radius: 20px;
+      display: inline-flex; align-items: center; justify-content: center;
+    }
+
+    .topbar-actions { display: flex; align-items: center; gap: 12px; }
+
+    .user-chip {
+      display: flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 30px; padding: 6px 14px 6px 8px;
+    }
+
+    .user-avatar {
+      width: 30px; height: 30px; border-radius: 50%;
+      background: var(--gold); color: var(--burgundy-deep);
+      font-size: 0.8rem; font-weight: 700;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+
+    .user-name { font-size: 0.88rem; color: var(--white); max-width: 120px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+    .btn-logout {
+      background: transparent;
+      border: 1.5px solid rgba(201,162,39,0.5);
+      color: var(--gold-light); padding: 7px 16px;
+      border-radius: var(--radius-sm);
+      font-family: 'Tajawal', sans-serif; font-size: 0.88rem; font-weight: 500;
+      cursor: pointer; transition: var(--transition);
+    }
+    .btn-logout:hover { background: var(--gold); color: var(--burgundy-deep); border-color: var(--gold); }
+
+    /* ─── PAGE WRAPPER ─── */
+    .page-wrapper { max-width: 1180px; margin: 0 auto; padding: 2rem 1.5rem; }
+
+    /* ─── PAGE SECTIONS ─── */
+    .page-section { display: none; animation: fadein .35s ease; }
+    .page-section.active { display: block; }
+    @keyframes fadein { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+
+    /* ─── SECTION HEADER ─── */
+    .section-header { display: flex; align-items: center; gap: 10px; margin-bottom: 1.75rem; }
+
+    .section-header-icon {
+      width: 40px; height: 40px; border-radius: var(--radius-sm);
+      background: var(--burgundy);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; flex-shrink: 0;
+    }
+
+    .section-header h2 { font-family: 'Amiri', serif; font-size: 1.5rem; color: var(--burgundy); font-weight: 700; }
+    .section-header p { font-size: 0.88rem; color: var(--muted); margin-top: 1px; }
+
+    /* ─── CARDS ─── */
+    .card { background: var(--white); border-radius: var(--radius-md); border: 1px solid var(--border); box-shadow: var(--shadow-sm); }
+    .card-padded { padding: 1.75rem; }
+
+    /* ─── PRODUCT GRID ─── */
+    .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 1.25rem; }
+
+    .product-card {
+      background: var(--white); border-radius: var(--radius-md);
+      border: 1px solid var(--border); box-shadow: var(--shadow-sm);
+      overflow: hidden; transition: var(--transition);
+      display: flex; flex-direction: column;
+    }
+
+    .product-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: var(--gold); }
+
+    .product-img { width: 100%; height: 200px; object-fit: cover; background: var(--cream); }
+    .product-body { padding: 1.25rem; flex: 1; display: flex; flex-direction: column; }
+
+    .product-craft-tag {
+      font-size: 0.74rem; color: var(--burgundy);
+      background: rgba(107,0,26,0.07); padding: 3px 10px;
+      border-radius: 20px; display: inline-block;
+      margin-bottom: 10px; font-weight: 500;
+    }
+
+    .product-name { font-family: 'Amiri', serif; font-size: 1.15rem; color: var(--ink); margin-bottom: 4px; font-weight: 700; }
+    .product-artisan { font-size: 0.85rem; color: var(--muted); margin-bottom: 1rem; flex: 1; }
+
+    .product-footer {
+      display: flex; justify-content: space-between; align-items: center;
+      border-top: 1px solid var(--border); padding-top: 12px; margin-top: auto;
+    }
+
+    .product-price { font-size: 1.2rem; font-weight: 700; color: var(--success); }
+    .product-price span { font-size: 0.75rem; font-weight: 400; color: var(--muted); }
+
+    /* ─── BUTTONS ─── */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: 7px; padding: 9px 20px; border-radius: var(--radius-sm);
+      font-family: 'Tajawal', sans-serif; font-size: 0.92rem; font-weight: 600;
+      cursor: pointer; transition: var(--transition); border: none; white-space: nowrap;
+    }
+    .btn-primary { background: var(--burgundy); color: var(--white); }
+    .btn-primary:hover { background: var(--burgundy-deep); }
+    .btn-danger { background: var(--danger-bg); color: var(--danger); border: none; }
+    .btn-danger:hover { background: var(--danger); color: var(--white); }
+    .btn-success { background: var(--success); color: var(--white); }
+    .btn-success:hover { background: #145c30; }
+    .btn-sm { padding: 6px 13px; font-size: 0.82rem; }
+    .btn-lg { padding: 13px 28px; font-size: 1.05rem; }
+
+    /* ─── TABLES ─── */
+    .data-table {
+      width: 100%; border-collapse: collapse;
+      background: var(--white); border-radius: var(--radius-md);
+      overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow-sm);
+    }
+
+    .data-table thead th {
+      background: var(--cream); color: var(--burgundy); font-weight: 600;
+      font-size: 0.88rem; padding: 13px 16px;
+      border-bottom: 1px solid var(--border); text-align: right;
+    }
+
+    .data-table tbody td {
+      padding: 13px 16px; border-bottom: 1px solid rgba(107,0,26,0.05);
+      font-size: 0.92rem; color: var(--ink); text-align: right; vertical-align: middle;
+    }
+
+    .data-table tbody tr:last-child td { border-bottom: none; }
+    .data-table tbody tr:hover td { background: var(--cream); }
+
+    /* ─── BADGES ─── */
+    .badge { display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; border-radius: 20px; font-size: 0.78rem; font-weight: 600; }
+    .badge-local { background: #E3F0FF; color: #0A3D7A; }
+    .badge-intl { background: #F0E8FB; color: #4A148C; }
+    .badge-status { background: var(--gold-pale); color: #7A5900; }
+    .badge-done { background: var(--success-bg); color: var(--success); }
+    .badge-danger { background: var(--danger-bg); color: var(--danger); }
+
+    /* ─── CART SUMMARY ─── */
+    .cart-summary {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: var(--radius-md); padding: 1.25rem 1.75rem;
+      display: flex; align-items: center; justify-content: space-between;
+      margin-top: 1.25rem; box-shadow: var(--shadow-sm);
+    }
+
+    .cart-total-label { font-size: 0.88rem; color: var(--muted); }
+    .cart-total-value { font-family: 'Amiri', serif; font-size: 1.5rem; color: var(--success); font-weight: 700; }
+
+    /* ─── SHIPPING SELECT ─── */
+    .shipping-select {
+      padding: 5px 10px; border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-family: 'Tajawal', sans-serif; font-size: 0.85rem;
+      color: var(--ink); background: var(--white); cursor: pointer;
+    }
+
+    /* ─── LIVE / BACKSTAGE ─── */
+    .live-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.25rem; }
+
+    .live-card {
+      background: var(--white); border-radius: var(--radius-md);
+      border: 1px solid var(--border); overflow: hidden; transition: var(--transition);
+    }
+    .live-card:hover { box-shadow: var(--shadow-md); }
+
+    .video-area {
+      width: 100%; aspect-ratio: 16/9; background: var(--ink);
+      position: relative; display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      color: rgba(255,255,255,0.6); font-size: 0.9rem; gap: 8px;
+    }
+
+    .live-pill {
+      position: absolute; top: 12px; right: 12px;
+      background: #D00; color: white;
+      font-size: 0.72rem; font-weight: 700;
+      padding: 3px 9px; border-radius: 4px;
+      letter-spacing: 0.05em; animation: blink 1.2s infinite;
+    }
+
+    @keyframes blink { 50% { opacity: 0.4; } }
+
+    .live-body { padding: 1.25rem; }
+    .live-body h3 { font-family: 'Amiri', serif; font-size: 1.05rem; color: var(--ink); margin-bottom: 4px; }
+    .live-body p { font-size: 0.85rem; color: var(--muted); }
+
+    /* ─── EMPTY STATE ─── */
+    .empty-state { text-align: center; padding: 3rem 2rem; color: var(--muted); }
+    .empty-state .empty-icon { font-size: 3rem; margin-bottom: 1rem; opacity: 0.5; }
+    .empty-state p { font-size: 0.95rem; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 768px) {
+      .topbar { padding: 10px; height: auto; flex-wrap: wrap; gap: 8px; }
+      .topbar-nav { overflow-x: auto; padding-bottom: 2px; }
+      .nav-tab { padding: 6px 10px; font-size: 0.82rem; }
+      .page-wrapper { padding: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <div class="topbar-brand">
+      <div class="topbar-logo">🏺</div>
+      <div>
+        <div class="topbar-title" id="welcome-client">سوق أصالة</div>
+        <div class="topbar-subtitle">الحرف اليدوية الجزائرية الأصيلة</div>
+      </div>
+    </div>
+
+    <nav class="topbar-nav">
+      <button class="nav-tab active" onclick="switchTab('market', this)">🏺 سوق الحرف</button>
+      <button class="nav-tab" onclick="switchTab('cart', this)">🛒 السلة <span class="nav-badge" id="cart-count">0</span></button>
+      <button class="nav-tab" onclick="switchTab('tracking', this)">📦 طلباتي</button>
+      <button class="nav-tab" onclick="switchTab('live', this)">🔴 البث المباشر</button>
+    </nav>
+
+    <div class="topbar-actions">
+      <div class="user-chip">
+        <div class="user-avatar" id="user-avatar-initials">Z</div>
+        <span class="user-name" id="user-display">زبون</span>
+      </div>
+      <button class="btn-logout" onclick="logout()">خروج</button>
+    </div>
+  </header>
+
+  <div class="page-wrapper">
+
+    <!-- MARKET -->
+    <section id="market" class="page-section active">
+      <div class="section-header">
+        <div class="section-header-icon">🏺</div>
+        <div>
+          <h2>معرض المنتجات الحرفية</h2>
+          <p>قطع يدوية أصيلة من ورشات الحرفيين الجزائريين</p>
+        </div>
+      </div>
+      <div class="products-grid" id="market-products">
+        <div class="empty-state"><div class="empty-icon">🏺</div><p>جاري تحميل المنتجات...</p></div>
+      </div>
+    </section>
+
+    <!-- CART -->
+    <section id="cart" class="page-section">
+      <div class="section-header">
+        <div class="section-header-icon">🛒</div>
+        <div>
+          <h2>سلة المشتريات</h2>
+          <p>راجع اختياراتك وحدد طريقة الشحن</p>
+        </div>
+      </div>
+
+      <div id="cart-empty" class="empty-state card card-padded">
+        <div class="empty-icon">🛒</div>
+        <p>سلتك فارغة حالياً. تصفح السوق وأضف ما يعجبك!</p>
+      </div>
+
+      <div id="cart-content" style="display:none;">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>المنتج</th>
+              <th>الحرفي</th>
+              <th>السعر</th>
+              <th>طريقة الشحن</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="cart-table-body"></tbody>
+        </table>
+
+        <div class="cart-summary">
+          <div>
+            <div class="cart-total-label">إجمالي السلة</div>
+            <div class="cart-total-value" id="cart-total-price">0 د.ج</div>
+          </div>
+          <button class="btn btn-success btn-lg" onclick="checkoutCart()">
+            ✅ تأكيد الطلب وإرساله للحرفيين
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRACKING -->
+    <section id="tracking" class="page-section">
+      <div class="section-header">
+        <div class="section-header-icon">📦</div>
+        <div>
+          <h2>تتبع طلباتي</h2>
+          <p>تابع حالة طلباتك من الورشة حتى باب منزلك</p>
+        </div>
+      </div>
+
+      <div id="tracking-empty" class="empty-state card card-padded">
+        <div class="empty-icon">📦</div>
+        <p>لا توجد طلبات بعد. اطلب منتجاتك من السوق!</p>
+      </div>
+
+      <table class="data-table" id="tracking-table" style="display:none;">
+        <thead>
+          <tr>
+            <th>رقم الطلب</th>
+            <th>المنتج</th>
+            <th>نوع الشحن</th>
+            <th>الوجهة</th>
+            <th>الحالة</th>
+          </tr>
+        </thead>
+        <tbody id="tracking-table-body"></tbody>
+      </table>
+    </section>
+
+    <!-- LIVE -->
+    <section id="live" class="page-section">
+      <div class="section-header">
+        <div class="section-header-icon">🔴</div>
+        <div>
+          <h2>البث المباشر والكواليس</h2>
+          <p>شاهد الحرفيين وهم يصنعون قطعهم الفنية أمامك</p>
+        </div>
+      </div>
+
+      <div class="live-grid">
+        <div class="live-card">
+          <div class="video-area">
+            <span class="live-pill">● LIVE</span>
+            <div style="font-size:2rem;">🎬</div>
+            <p>بث مباشر — تشكيل النحاس القسنطيني</p>
+          </div>
+          <div class="live-body">
+            <h3>تشكيل النحاس القسنطيني التقليدي</h3>
+            <p>الحرفي: سعيد النحاس · 128 مشاهد</p>
+          </div>
+        </div>
+
+        <div class="live-card">
+          <div class="video-area" style="background:#1a1a2e;">
+            <div style="font-size:2rem;">🎥</div>
+            <p>كواليس — صباغة الصوف بالأعشاب</p>
+          </div>
+          <div class="live-body">
+            <h3>صباغة الصوف بالأعشاب الطبيعية</h3>
+            <p>الحرفية: فاطمة للنسيج · فيديو توثيقي</p>
+          </div>
+        </div>
+
+        <div class="live-card">
+          <div class="video-area" style="background:#0a2e1a;">
+            <div style="font-size:2rem;">🏺</div>
+            <p>كواليس — نقر الفخار الأصيل</p>
+          </div>
+          <div class="live-body">
+            <h3>مراحل تشكيل وحرق الفخار التقليدي</h3>
+            <p>الحرفي: أحمد الخزفي · فيديو قصير</p>
+          </div>
+        </div>
+
+        <div class="live-card">
+          <div class="video-area" style="background:#1a1000;">
+            <span class="live-pill">● LIVE</span>
+            <div style="font-size:2rem;">🧵</div>
+            <p>بث مباشر — حياكة الزربية</p>
+          </div>
+          <div class="live-body">
+            <h3>حياكة زربية بابار الصوفية خطوة بخطوة</h3>
+            <p>الحرفية: نادية للنسيج · 74 مشاهد</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const user = JSON.parse(localStorage.getItem('currentUser'));
+      if (!user || user.role !== 'client') {
+        window.location.href = 'login.html'; return;
+      }
+      document.getElementById('welcome-client').textContent = `مرحباً، ${user.username}`;
+      document.getElementById('user-display').textContent = user.username;
+      document.getElementById('user-avatar-initials').textContent = user.username[0].toUpperCase();
+
+      renderMarket();
+      renderCart();
+      renderTracking();
+    });
+
+    function switchTab(tabId, btn) {
+      document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+      btn.classList.add('active');
+    }
+
+    function renderMarket() {
+      const products = JSON.parse(localStorage.getItem('products')) || [];
+      const grid = document.getElementById('market-products');
+      if (!products.length) {
+        grid.innerHTML = '<div class="empty-state"><div class="empty-icon">🏺</div><p>لا توجد منتجات متاحة بعد.</p></div>';
+        return;
+      }
+      grid.innerHTML = '';
+      products.forEach(p => {
+        const card = document.createElement('div');
+        card.className = 'product-card';
+        card.innerHTML = `
+          <img class="product-img" src="${p.img}" alt="${p.name}" onerror="this.src='https://via.placeholder.com/400x280/800020/FDF6E3?text=%F0%9F%8F%BA'">
+          <div class="product-body">
+            <span class="product-craft-tag">${p.craft || 'حرف يدوية'}</span>
+            <div class="product-name">${p.name}</div>
+            <div class="product-artisan">الحرفي: ${p.artisan}</div>
+            <div class="product-footer">
+              <div class="product-price">${p.price.toLocaleString('ar-DZ')} <span>د.ج</span></div>
+              <button class="btn btn-primary btn-sm" onclick="addToCart(${p.id})">🛒 أضف للسلة</button>
+            </div>
+          </div>`;
+        grid.appendChild(card);
+      });
+    }
+
+    function addToCart(productId) {
+      const products = JSON.parse(localStorage.getItem('products')) || [];
+      const product = products.find(p => p.id === productId);
+      if (!product) return;
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart.push({ ...product, shippingType: 'محلي', cartId: Date.now() });
+      localStorage.setItem('cart', JSON.stringify(cart));
+      renderCart();
+      showToast(`تمت إضافة "${product.name}" إلى سلتك`);
+    }
+
+    function renderCart() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      document.getElementById('cart-count').textContent = cart.length;
+      const tbody = document.getElementById('cart-table-body');
+      const emptyEl = document.getElementById('cart-empty');
+      const contentEl = document.getElementById('cart-content');
+
+      if (!cart.length) {
+        emptyEl.style.display = 'block';
+        contentEl.style.display = 'none';
+        return;
+      }
+      emptyEl.style.display = 'none';
+      contentEl.style.display = 'block';
+      tbody.innerHTML = '';
+      let total = 0;
+      cart.forEach((item, i) => {
+        total += item.price;
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><strong>${item.name}</strong></td>
+          <td>${item.artisan}</td>
+          <td style="color:var(--success);font-weight:700;">${item.price.toLocaleString('ar-DZ')} د.ج</td>
+          <td>
+            <select class="shipping-select" onchange="updateShipping(${i}, this.value)">
+              <option value="محلي" ${item.shippingType === 'محلي' ? 'selected' : ''}>🇩🇿 شحن محلي</option>
+              <option value="دولي" ${item.shippingType === 'دولي' ? 'selected' : ''}>🌍 شحن دولي</option>
+            </select>
+          </td>
+          <td><button class="btn btn-danger btn-sm" onclick="removeFromCart(${i})">حذف</button></td>`;
+        tbody.appendChild(tr);
+      });
+      document.getElementById('cart-total-price').textContent = total.toLocaleString('ar-DZ') + ' د.ج';
+    }
+
+    function updateShipping(i, val) {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart[i].shippingType = val;
+      localStorage.setItem('cart', JSON.stringify(cart));
+    }
+
+    function removeFromCart(i) {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart.splice(i, 1);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      renderCart();
+    }
+
+    function checkoutCart() {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      if (!cart.length) { showToast('السلة فارغة!'); return; }
+      const user = JSON.parse(localStorage.getItem('currentUser'));
+      let orders = JSON.parse(localStorage.getItem('orders')) || [];
+      cart.forEach(item => {
+        orders.push({
+          id: `ORD-${Math.floor(Math.random()*9000)+1000}`,
+          product: item.name,
+          client: user.username,
+          type: item.shippingType,
+          destination: item.shippingType === 'محلي' ? 'شحن للولايات الجزائرية' : 'تصدير دولي معتمد',
+          status: 'جاري التجهيز في الورشة'
+        });
+      });
+      localStorage.setItem('orders', JSON.stringify(orders));
+      localStorage.setItem('cart', JSON.stringify([]));
+      renderCart();
+      renderTracking();
+      showToast('تم إرسال طلباتك إلى الحرفيين! تابعها في "طلباتي".');
+      setTimeout(() => {
+        document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
+        document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+        document.getElementById('tracking').classList.add('active');
+        document.querySelectorAll('.nav-tab')[2].classList.add('active');
+      }, 1200);
+    }
+
+    function renderTracking() {
+      const orders = JSON.parse(localStorage.getItem('orders')) || [];
+      const user = JSON.parse(localStorage.getItem('currentUser'));
+      const myOrders = orders.filter(o => o.client === user.username);
+      const emptyEl = document.getElementById('tracking-empty');
+      const tableEl = document.getElementById('tracking-table');
+      const tbody = document.getElementById('tracking-table-body');
+
+      if (!myOrders.length) {
+        emptyEl.style.display = 'block';
+        tableEl.style.display = 'none';
+        return;
+      }
+      emptyEl.style.display = 'none';
+      tableEl.style.display = 'table';
+      tbody.innerHTML = '';
+      myOrders.forEach(order => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><strong style="color:var(--burgundy);">${order.id}</strong></td>
+          <td>${order.product}</td>
+          <td><span class="badge ${order.type === 'محلي' ? 'badge-local' : 'badge-intl'}">${order.type === 'محلي' ? '🇩🇿 محلي' : '🌍 دولي'}</span></td>
+          <td>${order.destination}</td>
+          <td><span class="badge badge-status">${order.status}</span></td>`;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function showToast(msg) {
+      let t = document.getElementById('toast');
+      if (!t) {
+        t = document.createElement('div');
+        t.id = 'toast';
+        t.style.cssText = 'position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--ink);color:white;padding:12px 24px;border-radius:8px;font-family:Tajawal,sans-serif;font-size:0.9rem;z-index:9999;transition:opacity .3s;border-right:3px solid var(--gold);';
+        document.body.appendChild(t);
+      }
+      t.textContent = msg;
+      t.style.opacity = '1';
+      clearTimeout(t._timeout);
+      t._timeout = setTimeout(() => t.style.opacity = '0', 3000);
+    }
+
+    function logout() {
+      localStorage.removeItem('currentUser');
+      window.location.href = 'login.html';
+    }
+  </script>
+</body>
+</html>
